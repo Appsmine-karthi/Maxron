@@ -1,6 +1,5 @@
 const request = require("request");
 const dotenv = require("dotenv");
-const Video = require("../models/video/Video");
 var FCM         = require('fcm-node');
 const axios     = require("axios");
 var { SendMailClient } = require("zeptomail");
@@ -182,20 +181,6 @@ Common.prototype.keyUpdateInObject = (
     return array.push(registerArray);
   }
 };
-// Common Like and share filter
-Common.prototype.filterLikeData = function (videos, userId) {
-  return new Promise(async (resolve, reject) => {
-    const common = new Common();
-       let videoData =   videos.map((filterData, index) =>{          
-          filterData.likeStatus = filterData.likes.some( like=> like.user.toString().includes(userId));
-          filterData.viewStatus = filterData.views.some( view=> view.user.toString().includes(userId));
-          filterData.favoriteStatus = filterData.favorites.some( favorite=> favorite.user.toString().includes(userId));
-          return filterData;           
-       })    
-      resolve(videoData);
-  })
-}
-
 //translate multiple title and description data
 Common.prototype.titleSpliter = function (JobArray, language) {
 
@@ -330,22 +315,6 @@ Common.prototype.generateExcelSheet = async (data) =>{
 
   })
 
-}
-
-
-// Job View Count Add
-Common.prototype.feedsFilterViewCountUpdate =async (feedData) =>{
-  console.log(`feedData - ${ JSON.stringify(feedData) }`)
-  feedData.length > 0 && feedData.map(async(data,index)=>{  
-      await Video.updateOne({ _id: data?._id }, { $inc: { viewCount: 1 } })  
-  });
-}
-// Job View Count Added
-Common.prototype.jobViewCountUpdate =async (jobData) =>{
-  jobData.length > 0 && jobData.map(async(data,index)=>{   
-      await Video.updateOne({ _id: data?._id }, { $inc: { Video: 1 } })
- 
-  });
 }
 // Job data Filter and get data
 Common.prototype.jobFilterData = function (JobArray, language) {

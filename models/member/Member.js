@@ -10,67 +10,70 @@ const MemberShema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    location:{
-        type: String,
-        required: true,
-    }, 
-    
     joinedDate:{
         type: String,
         required: true,
     },
     customerStatus:{
         type: Boolean,
-        required: true,
+        default: true,
     }, 
     totalPurchased:{
         type: Number,
-        required: true,
+        default: 0
     }, 
     soldDevices:{
         type: Number,
-        required: true,
+        default:0
     },
     replacedDevices:{
         type: Number,
-        required: true,
+        default:0
     },
     unsoldDevices:{
         type: Number,
-        required: true,
+        default:0
     },
     bussinessName:{
         type: String,
-        required: true,
+        default:null
     },
     alternateMobile:{
         type: Number,
-        required: true,
+        default:null
     },
     address:{
         type: String,
+        default:null
+    },
+    district:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Bind_City',
         required: true,
     },
-    District:{
-        type: String,
-        required: true,
-    },
+    location:{
+        type: String,        
+    }, 
     Pincode:{
         type: Number,
-        required: true,
+        
     },
     GSTNo:{
         type: Number,
-        required: true,
+        
     },
-    MailId:{
+    mailId:{
         type: String,
-        required: true,
     },
     password:{
         type: String,
-        required: true,
+        default: true
     },  
+    memberType:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Bind_MemberType',
+        required: true,
+    },
     isActive: {
         type: Boolean,   
         default: true       
