@@ -74,6 +74,13 @@ const MemberShema = new mongoose.Schema({
         ref: 'Bind_MemberType',
         required: true,
     },
+    otp:{
+        type:Number,
+    },
+    otpVerifyStatus:{
+        type : Boolean,
+        default: false
+    },
     isActive: {
         type: Boolean,   
         default: true       
